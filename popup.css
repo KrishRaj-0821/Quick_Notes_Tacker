@@ -1,0 +1,239 @@
+:root {
+  --bg: #f8f9fa; /* Light gray background for a clean look */
+  --accent: #1976d2; /* Vibrant blue for primary actions and header */
+  --muted: #6c757d; /* Darker gray for secondary text */
+  --danger: #dc3545; /* Standard red for danger actions */
+  --success: #28a745; /* Standard green (unused, but good to keep) */
+  --card: #ffffff; /* Pure white for cards */
+  --border: #e9ecef; /* Light border color */
+  --shadow: rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
+  --radius: 8px; /* Consistent rounded corners */
+}
+html,body {
+  margin:0;
+  padding:0;
+  width:420px;
+  /* Use a modern, clean sans-serif font stack */
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: #212529; /* Darker text for better readability */
+  line-height: 1.5;
+}
+.container { 
+  display:flex; 
+  flex-direction:column; 
+  height:600px; 
+  padding: 16px; /* Increased padding */
+  box-sizing:border-box; 
+}
+header { 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  padding:8px 0 16px 0; /* More spacing */
+}
+header h1 { 
+  font-size:24px; 
+  margin:0; 
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+main { 
+  flex:1; 
+  overflow-y:auto; /* Only allow vertical scrolling in main content */
+  overflow-x:hidden;
+}
+textarea#note {
+  width:100%;
+  height:120px;
+  resize:none;
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  padding:12px;
+  box-sizing:border-box;
+  font-size:14px;
+  line-height:1.5;
+  outline:none;
+  background: var(--card);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+textarea#note:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2); /* Focus glow effect */
+}
+/* General button styling */
+.controls button, .note-actions button, .notes-header button {
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.1s, opacity 0.1s, background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 4px var(--shadow);
+}
+.controls button:hover, .note-actions button:hover, .notes-header button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px var(--shadow);
+}
+.controls button:active, .note-actions button:active, .notes-header button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px var(--shadow);
+}
+
+/* Primary Button (Save) */
+.controls button:not(.secondary) { 
+  background: #00875a; /* Changed: Using a success green for the Save button */ 
+  color: #fff;
+}
+/* Secondary Buttons (Copy Draft, Clear Draft) */
+.controls button.secondary { 
+  background: #e9ecef; /* Lighter background */
+  color: #495057; /* Darker text */
+}
+/* Danger Button (Clear All) */
+.controls button.danger { 
+  background: var(--danger); 
+  color: #fff; 
+}
+.controls { 
+  display:flex; 
+  gap:10px; /* Increased gap */
+  align-items:center; 
+  margin-top:10px; 
+  flex-wrap:wrap; 
+}
+#status { 
+  font-size:13px; 
+  color:var(--muted); 
+  margin-left:auto; /* Pushes status to the right */
+  white-space: nowrap;
+}
+hr { 
+  border:none; 
+  border-top:1px solid var(--border); 
+  margin:16px 0; 
+}
+.notes-header { 
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center; 
+  margin-bottom: 8px;
+}
+.notes-header h2 { 
+  font-size:16px; 
+  margin:0; 
+  font-weight: 600;
+  color: #343a40;
+}
+.notes-list { 
+  margin-top:0; /* Removed redundant margin-top */
+  display:flex; 
+  flex-direction:column; 
+  gap:10px; /* Increased gap */
+  max-height: calc(100% - 40px); /* Fill remaining space more effectively */
+  overflow-y:auto; 
+  padding-right: 4px; /* Space for scrollbar */
+}
+/* Style the scrollbar for a nicer look */
+.notes-list::-webkit-scrollbar {
+  width: 6px;
+}
+.notes-list::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 10px;
+}
+.notes-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.note-card { 
+  background:var(--card); 
+  border:1px solid var(--border); 
+  padding:12px; 
+  border-radius:var(--radius); 
+  box-shadow: 0 4px 12px var(--shadow); /* More pronounced card shadow */
+  transition: transform 0.2s;
+}
+.note-card:hover {
+  border-color: #ced4da;
+}
+.note-text { 
+  white-space:pre-wrap; 
+  font-size:14px; 
+  margin-bottom:10px; 
+  color: #343a40;
+}
+.note-meta { 
+  font-size:12px; 
+  color:var(--muted); 
+  display:flex; 
+  justify-content:space-between; 
+  align-items:flex-end; /* Align actions and metadata nicely */
+  gap:10px; 
+  flex-wrap:wrap; 
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+
+.note-meta > div:first-child > div:first-child {
+    font-weight: 700 !important; /* Make the title stand out */
+    color: #495057;
+    margin-bottom: 2px;
+}
+.note-meta > div:first-child > div:last-child {
+    font-size: 11px;
+}
+
+.note-actions { 
+  display:flex; 
+  gap:6px; 
+}
+.note-actions button { 
+  padding: 6px 10px; /* Slightly smaller button for actions */
+  font-size:11px; 
+  border-radius: 6px; 
+  border:none; 
+  cursor:pointer; 
+  background: #6c757d; /* Muted color for default actions */
+  color:#fff; 
+  box-shadow: none; /* Remove shadow on small action buttons */
+}
+.note-actions button:hover {
+  transform: none;
+  box-shadow: none;
+  opacity: 0.9;
+}
+.note-actions button.secondary { 
+  background:#f1f3f5; 
+  color:var(--muted); 
+}
+.note-actions button:nth-child(1) { /* Copy button */
+  background: var(--accent); 
+}
+.note-actions button:nth-child(2) { /* Open button */
+  background: #00875a;
+}
+.note-actions button:nth-child(3) { /* Delete button */
+  background: var(--card); /* Changed: Set background to card/white */
+  color: var(--danger); /* Changed: Set font color to danger red */
+  border: 1px solid var(--danger); /* Added: Add a red border for clarity */
+}
+
+/* Empty notes message styling */
+.notes-list > div[style*="var(--muted)"] {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: var(--muted) !important;
+}
+
+footer { 
+  margin-top: auto; /* Push footer to the bottom */
+  padding-top: 10px;
+  text-align:center; 
+  font-size:11px; 
+  color:var(--muted);
+  border-top: 1px solid var(--border);
+}
